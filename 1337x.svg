@@ -1,19 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250">
-  <foreignObject width="100%" height="100%">
-    <html xmlns="http://www.w3.org/1999/xhtml">
-      <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-      </head>
-      <body class="bg-light d-flex justify-content-center align-items-center h-100">
-        <form action="https://www.google.com" method="get" class="p-3 border rounded bg-white shadow-sm" style="min-width:250px;">
-          <h5 class="text-center mb-3">Deposit</h5>
-          <div class="mb-3">
-            <label class="form-label">Amount (ETH)</label>
-            <input type="number" class="form-control" placeholder="Enter amount"/>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Deposit</button>
-        </form>
-      </body>
-    </html>
-  </foreignObject>
-</svg>
+<!DOCTYPE html>
+<html>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" width="400" height="250">
+    <foreignObject width="100%" height="100%">
+      <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        </head>
+        <body class="bg-light d-flex justify-content-center align-items-center h-100">
+          <form action="https://www.google.com" method="get" class="p-3 border rounded bg-white shadow-sm" style="min-width:250px;">
+            <h5 class="text-center mb-3">Deposit</h5>
+            <div class="mb-3">
+              <label class="form-label">Amount (ETH)</label>
+              <input type="number" class="form-control" placeholder="Enter amount"/>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Deposit</button>
+          </form>
+        </body>
+      </html>
+    </foreignObject>
+  </svg>
+</body>
+</html>
