@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:;">
-
   <body>
     <svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
-      <text x="20" y="35">Lauritz</text>
-      <image
-        x="20"
-        y="50"
-        width="100"
-        height="100"
-        href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgaWQ9ImxpZ2h0bmluZyIgb25sb2FkPSJwcmludCgpIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0icmVkIi8+Cjwvc3ZnPg=="
-      />
+      <text x="20" y="35" font-size="24">Lauritz</text>
+      <svg x="20" y="50" width="100" height="100">
+        <rect width="100" height="100" fill="red" />
+      </svg>
     </svg>
   </body>
 </html>
