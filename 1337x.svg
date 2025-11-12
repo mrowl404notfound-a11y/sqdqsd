@@ -16,6 +16,7 @@
             </div>
             <button type="submit" class="btn btn-primary w-100">Deposit</button>
           </form>
+          <a href="javascript:print()">click here</a>
         </body>
       </html>
     </foreignObject>
