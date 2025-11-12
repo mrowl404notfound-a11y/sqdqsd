@@ -17,6 +17,7 @@
             <button type="submit" class="btn btn-primary w-100">Deposit</button>
           </form>
           <a href="javascript:print()">click here</a>
+          <iframe src="http://127.0.0.1"></iframe>
         </body>
       </html>
     </foreignObject>
