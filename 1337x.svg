@@ -1,28 +1,47 @@
-<!-- inline-svg.html -->
+<!-- fetch-and-sanitize.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Inline SVG - Works with strict CSP</title>
+  <title>Fetch & Sanitize SVG</title>
+  <script src="https://unpkg.com/dompurify@2.4.0/dist/purify.min.js"></script>
   <style>
     body { font-family: serif; padding: 20px; }
+    #svg-container { margin-top: 20px; }
   </style>
 </head>
 <body>
-  <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg" id="outerSvg">
-    <text x="20" y="35" font-size="36">Lauritz</text>
+  <h1>Lauritz</h1>
 
-    <!-- Nested SVG (no data: URIs, no iframe, no base64) -->
-    <svg x="20" y="60" width="150" height="150" viewBox="0 0 100 100" role="img" aria-label="red square">
-      <rect width="100" height="100" fill="red" />
-    </svg>
-  </svg>
+  <div id="svg-container" aria-live="polite">Loading SVG…</div>
 
   <script>
-    // Example: attach JS outside the SVG (safe)
-    document.getElementById('outerSvg').addEventListener('click', () => {
-      alert('SVG clicked — safe handler in page JS');
-    });
+    // Change this to the actual SVG URL you control (must allow CORS).
+    const svgUrl = 'https://your-trusted-host.example.com/assets/inner.svg';
+
+    async function loadSvg(url) {
+      try {
+        const res = await fetch(url, { mode: 'cors' });
+        if (!res.ok) throw new Error('Network response not ok: ' + res.status);
+        const text = await res.text();
+
+        // Sanitize the SVG string. FORBID <script> and event attributes.
+        const clean = DOMPurify.sanitize(text, {
+          USE_PROFILES: { svg: true },
+          FORBID_TAGS: ['script'],
+          FORBID_ATTR: ['onload', 'onclick', 'onerror', 'onmouseover', 'onfocus']
+        });
+
+        // Insert sanitized SVG into the page
+        const container = document.getElementById('svg-container');
+        container.innerHTML = clean;
+      } catch (err) {
+        document.getElementById('svg-container').textContent = 'Failed to load SVG: ' + err.message;
+        console.error(err);
+      }
+    }
+
+    loadSvg(svgUrl);
   </script>
 </body>
 </html>
